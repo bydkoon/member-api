@@ -1,0 +1,14 @@
+
+spring:
+  profiles:
+    active:
+      on-profile: local
+  pid:
+    file: asnisum.pid
+  #DataSource
+  datasource:
+    url: jdbc:mysql://localhost:3306/asnisum?autoReconnect=true
+    username: asnisum
+    password: root!
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
