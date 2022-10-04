@@ -5,9 +5,11 @@ import com.asnisum.api.member.dto.JoinRequest;
 import com.asnisum.api.member.dto.JoinResponse;
 import com.asnisum.api.member.entity.Member;
 import com.asnisum.api.member.repository.MemberRepository;
+import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
+@Service
 public class MemberService {
 
     private final MemberRepository memberRepository;

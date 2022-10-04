@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   application:
-    image: auth
+    image: asinsum
     build:
       context: .
       dockerfile: ./Dockerfile
