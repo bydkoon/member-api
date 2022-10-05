@@ -1,6 +1,7 @@
 package com.asnisum.api.member.service;
 
 import com.asnisum.api.error.exception.DuplicatedMemberIdException;
+import com.asnisum.api.error.exception.MemberNotFoundException;
 import com.asnisum.api.member.dto.JoinRequest;
 import com.asnisum.api.member.dto.JoinResponse;
 import com.asnisum.api.member.entity.Member;
@@ -15,6 +16,16 @@ import javax.transaction.Transactional;
 @RequiredArgsConstructor
 public class MemberService {
     private final MemberRepository memberRepository;
+
+    public Member findByMemberIdx(Long idx) {
+        Member user = memberRepository.findByIdx(idx);
+
+        if (user == null) {
+            throw new MemberNotFoundException("유저를 찾을 수 없습니다.");
+        }
+
+        return user;
+    }
 
     public JoinResponse createMember(JoinRequest request) {
         if (isDuplicateMemberId(request.getMemberId())) {

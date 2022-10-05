@@ -3,6 +3,7 @@ package com.asnisum.api.member.controller;
 
 import com.asnisum.api.member.dto.JoinRequest;
 import com.asnisum.api.member.dto.JoinResponse;
+import com.asnisum.api.member.dto.MemberInfoResponse;
 import com.asnisum.api.member.service.MemberService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,8 +23,6 @@ public class MemberController {
             this.memberService = memberService;
         }
 
-//        @Operation(summary = "로그인", description = "아이디와 비밀번호를 이용하여 로그인을 진행합니다.")
-//        @ApiResponse(responseCode = "200", description = "로그인 성공")
         @PostMapping(value = "/signup")
         public ResponseEntity<JoinResponse> create(@RequestBody JoinRequest request) {
             return ResponseEntity
@@ -31,6 +30,11 @@ public class MemberController {
                     .body(memberService.createMember(request));
         }
 
+        @GetMapping("/{idx}")
+        public ResponseEntity<MemberInfoResponse> info(@PathVariable Long idx) {
+            return ResponseEntity
+                    .ok(new MemberInfoResponse(memberService.findByMemberIdx(idx)));
+        }
 
 
 

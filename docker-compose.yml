@@ -2,19 +2,16 @@ version: '3.4'
 
 services:
   application:
-    image: asinsum
+    container_name: asinsum
     build:
       context: .
-      dockerfile: ./Dockerfile
+      dockerfile: Dockerfile
     ports:
       - 8080:8080
     depends_on:
       - db
-    environment:
-      SPRING_PROFILES_ACTIVE: default
-      SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3306/asnisum
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: drowssap
+    networks:
+      - asinsum-network
   db:
     image: mysql
     environment:
@@ -24,3 +21,9 @@ services:
       TZ: Asia/Seoul
     ports:
       - 3306:3306
+    networks:
+      - asinsum-network
+
+networks:
+  asinsum-network:
+    driver: bridge\

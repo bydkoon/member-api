@@ -1,13 +1,14 @@
 spring:
-  config:
-    activate:
-      on-profile:
+  application:
+    name: asinsum
+  profiles:
+    active:
         default
   pid:
     file: asnisum.pid
   #DataSource
   datasource:
-    url: jdbc:mysql://localhost:3306/asnisum?autoReconnect=true
+    url: jdbc:mysql://db:3306/asnisum?autoReconnect=true
     username: root
     password: drowssap
     driver-class-name: com.mysql.cj.jdbc.Driver

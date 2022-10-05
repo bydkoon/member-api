@@ -53,7 +53,7 @@ public class SecurityConfig {
         http
                 .formLogin().disable()
                 .authorizeRequests()
-                .antMatchers("/api/**").permitAll();
+                .antMatchers("/member/**").permitAll();
 
         return http.build();
     }
