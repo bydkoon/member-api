@@ -24,14 +24,14 @@ public class MemberController {
         }
 
         @PostMapping(value = "/signup")
-        public ResponseEntity<JoinResponse> create(@RequestBody JoinRequest request) {
+        public ResponseEntity<JoinResponse> create(@RequestBody JoinRequest request) throws Exception {
             return ResponseEntity
                     .status(CREATED)
                     .body(memberService.createMember(request));
         }
 
         @GetMapping("/{idx}")
-        public ResponseEntity<MemberInfoResponse> info(@PathVariable Long idx) {
+        public ResponseEntity<MemberInfoResponse> info(@PathVariable Long idx) throws Exception {
             return ResponseEntity
                     .ok(new MemberInfoResponse(memberService.findByMemberIdx(idx)));
         }

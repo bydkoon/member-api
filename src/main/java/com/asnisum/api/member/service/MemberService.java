@@ -6,6 +6,8 @@ import com.asnisum.api.member.dto.JoinRequest;
 import com.asnisum.api.member.dto.JoinResponse;
 import com.asnisum.api.member.entity.Member;
 import com.asnisum.api.member.repository.MemberRepository;
+import com.asnisum.api.util.MemberEncrypt;
+import com.asnisum.api.util.PasswordUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +29,7 @@ public class MemberService {
         return user;
     }
 
-    public JoinResponse createMember(JoinRequest request) {
+    public JoinResponse createMember(JoinRequest request) throws Exception {
         if (isDuplicateMemberId(request.getMemberId())) {
             throw new DuplicatedMemberIdException("회원의 아이디가 이미 등록 되어있습니다..");
         }
@@ -36,10 +38,10 @@ public class MemberService {
         }
 
         Member member = Member.builder()
-                .memberId(request.getMemberId())
-                .password(request.getPassword())
-                .email(request.getEmail())
-                .phone(request.getPhone())
+                .memberId(MemberEncrypt.encryptAES256(request.getMemberId()))
+                .password(PasswordUtils.encryptSHA256(request.getPassword()))
+                .email(MemberEncrypt.encryptAES256(request.getEmail()))
+                .phone(MemberEncrypt.encryptAES256(request.getPhone()))
                 .build();
 
         Member saveMember = memberRepository.save(member);
