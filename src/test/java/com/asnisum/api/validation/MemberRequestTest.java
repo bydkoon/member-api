@@ -13,7 +13,7 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class JoinRequestTest extends BeanValidationTest {
+public class MemberRequestTest extends BeanValidationTest {
 
     private JoinRequest request;
 
@@ -125,7 +125,7 @@ public class JoinRequestTest extends BeanValidationTest {
     @Test
     @DisplayName("회원가입 성공 - 이메일 형식이 옳바른 경우")
     void 회원가입_성공_이메일_형식_옳바름() {
-        request.setEmail("sasstyle@example.com");
+        request.setEmail("teset@example.com");
 
         isJoinTrue();
     }
@@ -133,7 +133,7 @@ public class JoinRequestTest extends BeanValidationTest {
     @Test
     @DisplayName("회원가입 실패 - 이메일 형식이 유효하지 않은 경우(앳 없음)")
     void 회원가입_실패_이메일_형식_앳_없음() {
-        request.setEmail("sasstyle");
+        request.setEmail("teset");
 
         isJoinFalse();
     }
@@ -141,7 +141,7 @@ public class JoinRequestTest extends BeanValidationTest {
     @Test
     @DisplayName("회원가입 실패 - 이메일 형식이 유효하지 않은 경우(앳만 있음)")
     void 회원가입_실패_이메일_형식_앳만_있음() {
-        request.setEmail("sasstyle@");
+        request.setEmail("teset@");
 
         isJoinFalse();
     }

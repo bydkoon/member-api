@@ -36,7 +36,7 @@ class ApiApplicationTests {
 
     @Test
     @DisplayName("회원가입 성공")
-    void 회원가입() {
+    void 회원가입() throws Exception {
         given(memberRepository.existsByEmail(member.getEmail())).willReturn(false);
         given(memberRepository.save(any())).willReturn(member);
 
