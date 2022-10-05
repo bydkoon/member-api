@@ -1,23 +1,29 @@
 package com.asnisum.api.util;
 
 import lombok.NoArgsConstructor;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.security.MessageDigest;
 
 import static lombok.AccessLevel.PRIVATE;
 
 @NoArgsConstructor(access = PRIVATE)
 public final class PasswordUtils {
 
-    public static PasswordEncoder getEncoder() {
-        return LazyHolder.ENCODER;
+    public static String encryptSHA256(String s) {
+        return encrypt(s, "SHA-256");
     }
 
-    public static String encode(String rawPassword) {
-        return getEncoder().encode(rawPassword);
-    }
-
-    private static class LazyHolder {
-        private static final PasswordEncoder ENCODER = new BCryptPasswordEncoder();
+    public static String encrypt(String s, String messageDigest) {
+        try {
+            MessageDigest md = MessageDigest.getInstance(messageDigest);
+            byte[] passBytes = s.getBytes();
+            md.reset();
+            byte[] digested = md.digest(passBytes);
+            StringBuilder sb = new StringBuilder();
+            for (byte b : digested) sb.append(Integer.toString((b & 0xff) + 0x100, 16).substring(1));
+            return sb.toString();
+        } catch (Exception e) {
+            return s;
+        }
     }
 }
