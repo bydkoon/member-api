@@ -5,22 +5,18 @@ import com.asnisum.api.member.dto.JoinRequest;
 import com.asnisum.api.member.dto.JoinResponse;
 import com.asnisum.api.member.entity.Member;
 import com.asnisum.api.member.repository.MemberRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
 @Service
+@Transactional
+@RequiredArgsConstructor
 public class MemberService {
-
     private final MemberRepository memberRepository;
 
-    public MemberService(MemberRepository memberRepository) {
-        this.memberRepository = memberRepository;
-    }
-
-    @Transactional
     public JoinResponse createMember(JoinRequest request) {
-
         if (isDuplicateMemberId(request.getMemberId())) {
             throw new DuplicatedMemberIdException("회원의 아이디가 이미 등록 되어있습니다..");
         }

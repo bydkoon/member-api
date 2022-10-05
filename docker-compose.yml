@@ -9,12 +9,18 @@ services:
     ports:
       - 8080:8080
     depends_on:
-      - mysql
-  mysql:
+      - db
+    environment:
+      SPRING_PROFILES_ACTIVE: default
+      SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3306/asnisum
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: drowssap
+  db:
     image: mysql
     environment:
       MYSQL_DATABASE: asnisum
-      MYSQL_ROOT_PASSWORD: root!
+      MYSQL_ROOT_PASSWORD: drowssap
       MYSQL_ROOT_HOST: '%'
+      TZ: Asia/Seoul
     ports:
       - 3306:3306
