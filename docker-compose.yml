@@ -26,4 +26,4 @@ services:
 
 networks:
   asinsum-network:
-    driver: bridge\
+    driver: bridge
