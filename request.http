@@ -1,0 +1,15 @@
+###
+GET http://localhost:8080/member/1
+
+###
+POST http://127.0.0.1:8080/member/signup
+Content-Type: application/json
+
+{
+  "memberId": "hihello3",
+  "password": "fheif!4123",
+  "email": "fhskd4f@gmail.com",
+  "phone":"010-6666-4444"
+
+}
+
