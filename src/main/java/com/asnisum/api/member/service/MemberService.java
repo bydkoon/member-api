@@ -30,13 +30,12 @@ public class MemberService {
     }
 
     public JoinResponse createMember(JoinRequest request) throws Exception {
-        if (isDuplicateMemberId(request.getMemberId())) {
+        if (isDuplicateMemberId(MemberEncrypt.encryptAES256(request.getMemberId()))) {
             throw new DuplicatedMemberIdException("회원의 아이디가 이미 등록 되어있습니다..");
         }
-        if (isDuplicateEmail(request.getEmail())) {
+        if (isDuplicateEmail(MemberEncrypt.encryptAES256(request.getEmail()))) {
             throw new DuplicatedMemberIdException("회원의 이메일이 이미 등록 되어있습니다.");
         }
-
         Member member = Member.builder()
                 .memberId(MemberEncrypt.encryptAES256(request.getMemberId()))
                 .password(PasswordUtils.encryptSHA256(request.getPassword()))
