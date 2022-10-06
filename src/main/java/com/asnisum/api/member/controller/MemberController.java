@@ -28,6 +28,7 @@ public class MemberController {
             return ResponseEntity
                     .status(CREATED)
                     .body(memberService.createMember(request));
+
         }
 
         @GetMapping("/{idx}")

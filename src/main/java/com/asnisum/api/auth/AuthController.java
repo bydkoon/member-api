@@ -24,10 +24,8 @@ public class AuthController {
     // handler method to handle user registration form request
 
     @GetMapping("/register")
-    public String showRegistrationForm(Model model){
+    public String showRegistrationForm(){
         // create model object to store form data
-
-        model.addAttribute("member", new Member());
         return "register";
     }
     @GetMapping("/process_register")
