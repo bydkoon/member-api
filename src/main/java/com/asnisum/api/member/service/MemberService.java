@@ -10,12 +10,12 @@ import com.asnisum.api.util.MemberEncrypt;
 import com.asnisum.api.util.PasswordUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 
 @Service
-@Transactional
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class MemberService {
     private final MemberRepository memberRepository;
     public Member findByMemberIdx(Long idx) {
@@ -28,6 +28,7 @@ public class MemberService {
         return user;
     }
 
+    @Transactional
     public JoinResponse createMember(JoinRequest request) throws Exception {
         if (isDuplicateMemberId(MemberEncrypt.encryptAES256(request.getMemberId()))) {
             throw new DuplicatedMemberIdException("회원의 아이디가 이미 등록 되어있습니다..");
