@@ -5,23 +5,20 @@ import com.asnisum.api.member.dto.JoinRequest;
 import com.asnisum.api.member.dto.JoinResponse;
 import com.asnisum.api.member.dto.MemberInfoResponse;
 import com.asnisum.api.member.service.MemberService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.springframework.http.HttpStatus.CREATED;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping(value = "/member")
 public class MemberController {
 
         private final MemberService memberService;
-        @Autowired
-        public MemberController(MemberService memberService) {
-            this.memberService = memberService;
-        }
 
         @PostMapping(value = "/signup")
         public ResponseEntity<JoinResponse> create(@RequestBody JoinRequest request) throws Exception {
