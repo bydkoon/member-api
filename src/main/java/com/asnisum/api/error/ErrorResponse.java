@@ -6,8 +6,6 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public class ErrorResponse {
-
-
     private final int responseCode;
 
     private final String message;

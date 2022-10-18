@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   application:
-    container_name: asinsum
+    container_name: asinsum-application
     build:
       context: .
       dockerfile: Dockerfile
@@ -14,6 +14,7 @@ services:
       - asinsum-network
   db:
     image: mysql
+    container_name: asinsum-mysql
     environment:
       MYSQL_DATABASE: asnisum
       MYSQL_ROOT_PASSWORD: drowssap
@@ -21,6 +22,9 @@ services:
       TZ: Asia/Seoul
     ports:
       - 3306:3306
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
     networks:
       - asinsum-network
 
