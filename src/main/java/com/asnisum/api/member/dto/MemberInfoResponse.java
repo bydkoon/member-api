@@ -12,14 +12,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class MemberInfoResponse {
-
-
     private String memberId;
-
     private String email;
-
     private String phone;
-
     public MemberInfoResponse(Member member) throws Exception {
         this.memberId = MemberEncrypt.decryptAES256(member.getMemberId());
         this.email = MemberEncrypt.decryptAES256(member.getEmail());

@@ -14,8 +14,6 @@ public class ErrorController {
      * 스프링 유저 서비스 에러 처리 핸들러
      * @return ErrorResponse
      */
-
-
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler
     public ErrorResponse duplicatedException(DuplicatedException e) {
