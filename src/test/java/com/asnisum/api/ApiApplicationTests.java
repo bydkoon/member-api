@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 class ApiApplicationTests {
-    private MemberService userService;
+    private MemberService memberService;
 
     @Mock
     private MemberRepository memberRepository;
@@ -28,7 +28,7 @@ class ApiApplicationTests {
 
     @BeforeEach
     void setUp() {
-        userService = new MemberService(memberRepository);
+        memberService = new MemberService(memberRepository);
 
         member = MemberDummy.member();
         joinRequest = MemberDummy.join();
@@ -40,7 +40,7 @@ class ApiApplicationTests {
         given(memberRepository.existsByEmail(member.getEmail())).willReturn(false);
         given(memberRepository.save(any())).willReturn(member);
 
-        JoinResponse response = userService.createMember(joinRequest);
+        JoinResponse response = memberService.createMember(joinRequest);
 
         assertThat(member.getMemberId()).isEqualTo(response.getMemberId());
         assertThat(member.getPhone()).isEqualTo(response.getPhone());
